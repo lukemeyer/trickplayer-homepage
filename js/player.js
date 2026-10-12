@@ -85,7 +85,7 @@ export class TrickplayerWeb {
     this.timeline = parseTimelineIndex(bifBuffer);
     this.subtitles = parseSrt(srtText);
     this.durationMs = this.timeline.durationMs;
-    this.currentTimeMs = 22000; // Start at 22s for instant dialogue playback
+    this.currentTimeMs = this.subtitles.length > 0 ? this.subtitles[0].startMs : 23000;
     this.frameCache.clear();
 
     if (this.slider) {
@@ -330,7 +330,7 @@ export class TrickplayerWeb {
       .reverse()
       .find((s) => s.startMs < this.currentTimeMs - 1500 && s.text.length > 0);
     if (prev) {
-      this.currentTimeMs = prev.startMs;
+      this.currentTimeMs = prev.cues[0]?.startMs ?? prev.startMs;
     } else {
       this.currentTimeMs = Math.max(0, this.currentTimeMs - 5000);
     }
@@ -342,7 +342,7 @@ export class TrickplayerWeb {
     if (!this.scenes.length) return;
     const next = this.scenes.find((s) => s.startMs > this.currentTimeMs + 500 && s.text.length > 0);
     if (next) {
-      this.currentTimeMs = next.startMs;
+      this.currentTimeMs = next.cues[0]?.startMs ?? next.startMs;
     } else {
       this.currentTimeMs = Math.min(this.durationMs, this.currentTimeMs + 5000);
     }
@@ -759,10 +759,17 @@ export class TrickplayerWeb {
 
 // Auto-initialize when document loads in browser
 if (typeof window !== "undefined") {
-  window.addEventListener("DOMContentLoaded", () => {
+  const initPlayer = () => {
+    if (window.trickplayer) return;
     const player = new TrickplayerWeb();
     player.loadDemo();
     window.trickplayer = player;
-  });
+  };
+
+  if (document.readyState === "loading") {
+    window.addEventListener("DOMContentLoaded", initPlayer);
+  } else {
+    initPlayer();
+  }
 }
 

@@ -26,6 +26,7 @@
         <li><a href="#platforms" class="nav-link">Platforms</a></li>
         <li><a href="#webplayer" class="nav-link">Web Player</a></li>
         <li><a href="#privacy" class="nav-link">Privacy</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -141,7 +142,7 @@
             <div class="concept-step-number">02</div>
             <h3 class="concept-card-title">Subtitle Timing</h3>
             <p class="concept-card-desc">
-              By reading the subtitle track (SRT or WebVTT), Trickplayer matches each line of spoken dialogue with the video still captured at that exact timestamp.
+              By reading the subtitle track, Trickplayer matches each line of spoken dialogue with the video still captured at that exact timestamp.
             </p>
           </div>
 
@@ -175,7 +176,7 @@
             <span class="device-badge" style="background: rgba(234, 158, 37, 0.15); color: #ea9e25;">Account Discovery</span>
             <h3 class="knowledge-card-title">Plex</h3>
             <p style="color: var(--text-secondary); margin-bottom: 1.25rem;">
-              Plex provides a streamlined sign-in flow that gives you access to your entire server ecosystem with a single login.
+              Plex provides a streamlined one-time PIN sign-in that gives you access to your entire server ecosystem with a single login.
             </p>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.95rem; color: var(--text-secondary);">
               <li style="display: flex; gap: 0.6rem;">
@@ -184,11 +185,15 @@
               </li>
               <li style="display: flex; gap: 0.6rem;">
                 <span style="color: var(--accent-g2);">&check;</span>
-                <span><strong>Dense Thumbnail Track:</strong> Uses Plex's BIF trickplay files with 2-second thumbnail intervals for smooth scene progression.</span>
+                <span><strong>Fast and Efficient:</strong> Uses Plex's BIF trickplay files with 2-second thumbnail intervals and efficient downloads (enable <em>Generate video preview thumbnails</em> under Scheduled Tasks).</span>
               </li>
               <li style="display: flex; gap: 0.6rem;">
-                <span style="color: var(--accent-wearos);">&bull;</span>
-                <span><strong>Requires External Subtitles:</strong> Plex's API only exposes subtitle sidecars (such as <code>.srt</code> files). Subtitles embedded inside media container files cannot be extracted separately without full video transcoding.</span>
+                <span style="color: var(--accent-g2);">&check;</span>
+                <span><strong>Embedded &amp; External Subtitles:</strong> External <code>.srt</code> files play immediately, while embedded text tracks inside video files can be extracted and cached on first play.</span>
+              </li>
+              <li style="display: flex; gap: 0.6rem;">
+                <span style="color: var(--accent-g2);">&check;</span>
+                <span><strong>In-App Subtitle Search:</strong> Use <strong>Find Subtitles</strong> to search OpenSubtitles through the native Plex search.</span>
               </li>
             </ul>
           </div>
@@ -198,20 +203,24 @@
             <span class="device-badge" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-wearos);">Open Media System</span>
             <h3 class="knowledge-card-title">Jellyfin</h3>
             <p style="color: var(--text-secondary); margin-bottom: 1.25rem;">
-              Jellyfin provides complete flexibility for subtitle formats and connects directly to your personal self-hosted server instance.
+              Jellyfin provides native embedded subtitle serving and connects directly to your self-hosted server with Quick Connect sign-in.
             </p>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.95rem; color: var(--text-secondary);">
               <li style="display: flex; gap: 0.6rem;">
                 <span style="color: var(--accent-g2);">&check;</span>
-                <span><strong>Embedded Subtitle Support:</strong> Jellyfin converts and serves embedded subtitles on demand, meaning nearly any video with subtitles works immediately.</span>
+                <span><strong>Embedded Subtitle Support:</strong> Jellyfin converts and serves embedded text subtitles on demand, so items with embedded tracks play immediately without an extraction step.</span>
               </li>
               <li style="display: flex; gap: 0.6rem;">
                 <span style="color: var(--accent-g2);">&check;</span>
-                <span><strong>Trickplay Tile Grids:</strong> Reads Jellyfin's trickplay tile sheets directly from your media library. Jellyfin uses 10-second intervals by default—increasing the trickplay frequency in your library settings provides a smoother experience.</span>
+                <span><strong>In-App Subtitle Search:</strong> Supports <strong>Find Subtitles</strong> right from the app using your Jellyfin server's configured subtitle plugin.</span>
+              </li>
+              <li style="display: flex; gap: 0.6rem;">
+                <span style="color: var(--accent-g2);">&check;</span>
+                <span><strong>Trickplay Tile Grids:</strong> Reads Jellyfin's trickplay tile sheets directly (enable <em>Trickplay image extraction</em> in library settings). Defaults to 10-second intervals, which can be <a href="#faq-jellyfin-interval" style="text-decoration: underline; color: var(--accent-wearos);">lowered in <code>system.xml</code></a> for a smoother experience.</span>
               </li>
               <li style="display: flex; gap: 0.6rem;">
                 <span style="color: var(--accent-wearos);">&bull;</span>
-                <span><strong>Direct Server Connection:</strong> Connects straight to your server address (e.g. <code>https://jellyfin.example.ts.net</code>). Jellyfin has no central account service, so you point directly to your own instance.</span>
+                <span><strong>Local &amp; Tailscale Connection:</strong> Because Jellyfin has no central relay domain like <code>plex.direct</code>, connect over your local network or remotely via a Tailscale address (e.g. <code>https://[your-jellyfin-server].ts.net</code>).</span>
               </li>
             </ul>
           </div>
@@ -393,7 +402,15 @@
                 </li>
                 <li class="platform-feature-item">
                   <span class="feature-check">&check;</span>
-                  <span><strong>Temple Touch Controls:</strong> Tap your glasses to pause or resume playback; double-tap to exit back to your day.</span>
+                  <span><strong>Browse from Glasses or Phone:</strong> Browse your full library on the phone, or use on-glasses shortcuts—<strong>Recently Played</strong>, <strong>Continue Watching</strong>, and <strong>Playlists</strong>—without taking your phone out.</span>
+                </li>
+                <li class="platform-feature-item">
+                  <span class="feature-check">&check;</span>
+                  <span><strong>Adaptive Picture Quality:</strong> Automatically adjusts image quality when the Bluetooth link slows so frames keep arriving smoothly instead of stalling, then recovers on its own.</span>
+                </li>
+                <li class="platform-feature-item">
+                  <span class="feature-check">&check;</span>
+                  <span><strong>Resume &amp; Progress Sync:</strong> Picks up right where you left off from your server, with optional progress reporting to keep your other clients in sync.</span>
                 </li>
                 <li class="platform-feature-item">
                   <span class="feature-check">&check;</span>
@@ -551,6 +568,159 @@
         </div>
       </div>
     </section>
+
+    <!-- ======================================================================
+         FAQ Section
+         ====================================================================== -->
+    <section class="section" id="faq" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">FAQ</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" id="faq-streaming">
+            <summary class="faq-question">Is this streaming video to my glasses?</summary>
+            <div class="faq-answer">
+              <p>
+                No &mdash; and it can't be. The link carries a few kilobytes a second, and the display is monochrome green. Trickplayer sends one still every few seconds, using the preview thumbnails your server already generated. Think motion comic, not film.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-cant-be-played">
+            <summary class="faq-question">Why does an item say it can't be played?</summary>
+            <div class="faq-answer">
+              <p>
+                It is missing one of the two halves. Trickplayer needs preview thumbnails (a trick-play index) <em>and</em> text subtitles for the same item. Every episode is listed, and the badges say which half each one has:
+              </p>
+              <table class="faq-table">
+                <thead>
+                  <tr>
+                    <th>Badge</th>
+                    <th>Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>SUBS</strong> in green</td>
+                    <td>Subtitles ready. Plays straight away.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SUBS</strong> in amber</td>
+                    <td>Subtitles are inside the video file. Its page offers <strong>Extract</strong> (read them out through your server, once) or <strong>Download</strong> (search for a subtitle file). After either, it's green.</td>
+                  </tr>
+                  <tr>
+                    <td><del><strong>SUBS</strong></del> in red</td>
+                    <td>Plex lists a subtitle file that isn't on the server any more. Use <strong>Find subtitles</strong>, or refresh the item's metadata in Plex.</td>
+                  </tr>
+                  <tr>
+                    <td><del><strong>SUBS</strong></del> in grey</td>
+                    <td>No text subtitles. Image-based ones (PGS, VobSub), styled ASS tracks and forced-only tracks don't count. Use <strong>Find subtitles</strong> to get some.</td>
+                  </tr>
+                  <tr>
+                    <td><del><strong>IMG</strong></del> in grey</td>
+                    <td>No preview thumbnails yet. That one has to be fixed on the server &mdash; see <a href="#media-servers" style="text-decoration: underline; color: var(--accent-wearos);">Supported Servers</a>.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-extract-vs-download">
+            <summary class="faq-question">What's the difference between Extract and Download?</summary>
+            <div class="faq-answer">
+              <p>
+                Plex won't hand over a subtitle track embedded inside a video file directly, only sidecar files sitting next to it. <strong>Extract</strong> asks your server's transcoder to read the track out, which means the server runs through the whole file once: a few seconds to a couple of minutes depending on the video and the server's hardware. The progress bar shows an estimate of the time left once it knows the pace, and <strong>Cancel</strong> stops the work on the server. Your phone downloads only the subtitles themselves (tens of kilobytes), and the result is kept, so playing the item again is instant. The subtitles are the file's own, so they're in sync with it.
+              </p>
+              <p>
+                <strong>Download</strong> searches for a subtitle file instead, through your media server, and is quicker for a long video or a slow server. The file comes from a third party, so its timing may differ from your copy &mdash; see below.
+              </p>
+              <p>
+                Extraction reads the track that is <strong>selected</strong> for the item in Plex; to change the language, pick the subtitle track in a Plex app first. Jellyfin serves embedded tracks on its own, so items there never need extracting.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-downloaded-subtitles">
+            <summary class="faq-question">Where do downloaded subtitles come from?</summary>
+            <div class="faq-answer">
+              <p>
+                From your media server's own subtitle search &mdash; on Plex, the OpenSubtitles agent built into the server; on Jellyfin, a subtitle plugin. Trickplayer only asks the server to search and to download the one you pick: <strong>the server</strong> contacts OpenSubtitles, fetches the file and attaches it to the item, so it's then there for every app that plays from your server. The file never passes through your phone.
+              </p>
+              <p>
+                Results list the release each file was made for, and are ordered best first: files the search matched to your exact video, then plain subtitles before ones that describe sounds (SDH), then the most downloaded. A file whose name is for a different episode is marked and moved to the bottom, even when the search calls it a match &mdash; that happens. Pick the one whose release looks like your copy; if its timing is off, search again and pick another.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-jellyfin-catch">
+            <summary class="faq-question">What's the catch with Jellyfin?</summary>
+            <div class="faq-answer">
+              <p>
+                Remote access. Glasses apps declare in advance which domains they may reach, and Plex has a first-party one (<code>plex.direct</code>) that covers every user's server. Jellyfin has no equivalent, so there is no single domain to declare.
+              </p>
+              <p>
+                Local connections work. For remote access, Trickplayer also permits <code>*.ts.net</code>, so a <a href="https://tailscale.com" target="_blank" rel="noopener" style="text-decoration: underline; color: var(--accent-wearos);">Tailscale</a> network will reach your server from anywhere. Anything else is currently out of reach.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-jellyfin-interval">
+            <summary class="faq-question">How do I shorten the time between frames in Jellyfin?</summary>
+            <div class="faq-answer">
+              <p>
+                Jellyfin defaults to generating trickplay images every 10 seconds (<code>10000</code> ms). To shorten the interval between frames, edit your Jellyfin server's <code>system.xml</code> configuration file and decrease the <code>&lt;Interval&gt;</code> value inside <code>&lt;TrickplayOptions&gt;</code> (for example, <code>5000</code> for 5 seconds):
+              </p>
+              <pre class="faq-code"><code>&lt;TrickplayOptions&gt;
+    &lt;EnableHwAcceleration&gt;false&lt;/EnableHwAcceleration&gt;
+    &lt;EnableHwEncoding&gt;false&lt;/EnableHwEncoding&gt;
+    &lt;EnableKeyFrameOnlyExtraction&gt;false&lt;/EnableKeyFrameOnlyExtraction&gt;
+    &lt;ScanBehavior&gt;NonBlocking&lt;/ScanBehavior&gt;
+    &lt;ProcessPriority&gt;BelowNormal&lt;/ProcessPriority&gt;
+    <strong>&lt;Interval&gt;5000&lt;/Interval&gt;</strong>
+    &lt;WidthResolutions&gt;
+      &lt;int&gt;320&lt;/int&gt;
+    &lt;/WidthResolutions&gt;
+    &lt;TileWidth&gt;10&lt;/TileWidth&gt;
+    &lt;TileHeight&gt;10&lt;/TileHeight&gt;
+    &lt;Qscale&gt;4&lt;/Qscale&gt;
+    &lt;JpegQuality&gt;90&lt;/JpegQuality&gt;
+    &lt;ProcessThreads&gt;1&lt;/ProcessThreads&gt;
+  &lt;/TrickplayOptions&gt;</code></pre>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-blocky-picture">
+            <summary class="faq-question">The picture got blocky mid-episode. Is something broken?</summary>
+            <div class="faq-answer">
+              <p>
+                No &mdash; that's the quality ladder doing its job. When sends slow down or fail, the picture steps down to something cheaper so frames keep arriving rather than stopping, then climbs back on its own once the link recovers. Locking your phone is the most common cause: it slows Bluetooth enough to push full-size frames past the host's deadline.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-privacy">
+            <summary class="faq-question">Does it send my viewing data anywhere?</summary>
+            <div class="faq-answer">
+              <p>
+                No. It talks to your media server and nothing else. There is no account, no telemetry and no analytics. If you turn on <em>Report progress</em>, positions are written to <strong>your</strong> server &mdash; the same thing any other client does &mdash; and nowhere else.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="faq-glare">
+            <summary class="faq-question">Why is the brightest part of the picture uncomfortable?</summary>
+            <div class="faq-answer">
+              <p>
+                The display's top level reads much brighter than its position in the range suggests, which on a see-through display can cause eye strain. The <strong>Glare</strong> setting gives up the brightest levels to soften it. It is off by default; the first two steps cost roughly half a percent of the picture.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ========================================================================
@@ -586,7 +756,31 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      function openTargetFaq(hash) {
+        if (!hash || hash.charAt(0) !== "#" || hash.length < 2) return;
+        var el = document.getElementById(decodeURIComponent(hash.slice(1)));
+        if (!el) return;
+        var details = el.tagName === "DETAILS" ? el : el.closest("details");
+        if (details) {
+          details.open = true;
+        }
+      }
+      openTargetFaq(window.location.hash);
+      window.addEventListener("hashchange", function () {
+        openTargetFaq(window.location.hash);
+      });
+      document.addEventListener("click", function (e) {
+        var link = e.target.closest('a[href^="#"]');
+        if (link) {
+          openTargetFaq(link.getAttribute("href"));
+        }
+      });
+    })();
+  </script>
+
   <!-- Web Player JavaScript Modules -->
-  <script type="module" src="js/player.js"></script>
+  <script type="module" src="js/player.js?v=2"></script>
 </body>
 </html>
